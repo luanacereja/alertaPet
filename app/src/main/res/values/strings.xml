@@ -1,0 +1,64 @@
+<resources>
+
+    <string name="app_name">Alerta Pet</string>
+
+    <!-- Fragments-->
+    <string name="lost">Lost TAB</string>
+    <string name="street">Street TAB</string>
+    <string name="donation">Donation TAB</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_my_reports">Meus Reports</string>
+    <string name="nav_logout">Sair</string>
+    <string name="nav_profile_settings">Perfil</string>
+    <string name="nav_about_us">Sobre nós</string>
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>Meus Reports</item>
+        <item>Perfil</item>
+        <item>Sobre nós</item>
+        <item>Sair</item>
+    </string-array>
+
+    <string name="activity_title_about_us">Sobre nós</string>
+    <string name="action_logout">Sair</string>
+
+
+    <string name="action_sign_in_short">Register</string>
+    <string name="email">Email</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Autenticação falhou, verifique seu email ou senha ou se cadastre</string>
+    <string name="change_email">Mudar Email</string>
+    <string name="change_password">Mudar Password</string>
+    <string name="send_password_reset_email">Send Password reset email</string>
+    <string name="remove_user">Remover usuário</string>
+    <string name="new_pass">Nova Senha</string>
+    <string name="title_activity_profile">Firebase</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Nome</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_link_to_register">Não é um membro? Se cadastre no Alerta Pet agora!</string>
+    <string name="btn_link_to_login">Ja possuo cadastro. Me logue!</string>
+    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="btn_forgot_password">Esqueceu sua senha?</string>
+    <string name="btn_reset_password">Resetar Senha</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="lbl_forgot_password">Esqueceu sua senha?</string>
+    <string name="forgot_password_msg">Informe seu email cadastrado para o envio de reset de sua senha .</string>
+    <string name="logo">logo</string>
+</resources>

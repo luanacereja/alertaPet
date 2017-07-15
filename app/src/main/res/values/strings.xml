@@ -32,7 +32,7 @@
     <string name="action_logout">Sair</string>
 
 
-    <string name="action_sign_in_short">Register</string>
+    <string name="action_sign_in_short">Registrar</string>
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Autenticação falhou, verifique seu email ou senha ou se cadastre</string>
@@ -61,4 +61,25 @@
     <string name="lbl_forgot_password">Esqueceu sua senha?</string>
     <string name="forgot_password_msg">Informe seu email cadastrado para o envio de reset de sua senha .</string>
     <string name="logo">logo</string>
+
+
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
+
+    <string-array name="category_array">
+        <item>De rua</item>
+        <item>Perdido</item>
+        <item>Doação</item>
+
+    </string-array>
+
+    <string name="spinnerDialogText">Escolha uma categoria</string>
+
+    <string name="textAboutApp">Aplicativo desenvolvido para divulgação de animais que se encontram na rua,
+    perdidos ou para pessoas que desejam doar. </string>
+
+    <string name="textAboutApp2">Faça um report enviando a imagem, o local, a descrição e um telefone para contato. </string>
+
+
+
 </resources>

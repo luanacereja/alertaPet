@@ -22,19 +22,61 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/user_profile_settings"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        app:civ_border_width="1dp"
-        android:layout_marginTop="69dp"
-        android:src="@drawable/ic_user_circle"
+    <ImageView
+        android:id="@+id/profile_settings_image"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="35dp"
         android:scaleType="fitCenter"
-
+        app:srcCompat="@drawable/ic_user_circle"
         android:layout_below="@+id/appBarLayout2"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:id="@+id/profile_settings_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Luana"
+        android:textSize="25dp"
+        android:layout_below="@+id/profile_settings_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp" />
 
+    <TextView
+        android:id="@+id/profile_settings_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="lu.cereja@hotmail.com"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_below="@+id/profile_settings_name"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/profile_settings_buttom"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_settings_email"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="68dp"
+        android:layout_toStartOf="@+id/button_change_name"
+        android:text="Alterar Foto"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <Button
+        android:id="@+id/button_change_name"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/profile_settings_buttom"
+        android:layout_alignBottom="@+id/profile_settings_buttom"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp"
+        android:text="Alterar Nome"
+        android:textColor="@color/colorPrimaryDark" />
+
+    />
 
 
 </RelativeLayout>

@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_marginTop="71dp"
+        android:text="Alerta Pet"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/textAboutApp"
+        android:layout_marginEnd="96dp" />
 
-    <include layout="@layout/app_bar" android:id="@+id/app_bar_about_us"/>
+    <TextView
+        android:id="@+id/textAboutApp"
+        android:layout_width="330dip"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
+        android:text="@string/textAboutApp"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
-    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="330dip"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textAboutApp"
+        android:layout_below="@+id/textAboutApp"
+        android:layout_marginTop="55dp"
+        android:text="@string/textAboutApp2"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
-
-
-</LinearLayout>
+</RelativeLayout>

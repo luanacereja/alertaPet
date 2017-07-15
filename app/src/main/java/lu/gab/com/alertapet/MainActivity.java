@@ -3,6 +3,7 @@ package lu.gab.com.alertapet;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,8 +33,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 import lu.gab.com.alertapet.Fragment.*;
 import lu.gab.com.alertapet.activity.AboutUsActivity;
+import lu.gab.com.alertapet.activity.CreateReportActivity;
+import lu.gab.com.alertapet.activity.MyReportsActivity;
 import lu.gab.com.alertapet.activity.ProfileActivity;
 import lu.gab.com.alertapet.other.CircleTransform;
 
@@ -48,11 +52,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.vansuita.pickimage.bean.PickResult;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
+import com.vansuita.pickimage.listeners.IPickResult;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, signOut;
@@ -99,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
-
     private SectionsPagerAdapter sectionsPagerAdapter;
 
     @Override
@@ -131,11 +141,12 @@ public class MainActivity extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
+
+        // Buttom new Report
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                openDialogChoosePic();
             }
         });
 
@@ -173,6 +184,55 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void openDialogChoosePic() {
+
+        //open dialog with gallery or camera
+        PickSetup setup = new PickSetup();
+        setup
+                .setTitle("Escolha uma imagem")
+                .setCameraButtonText("Camera")
+                .setGalleryButtonText("Galeria")
+                .setSystemDialog(false);
+
+
+        PickImageDialog.build(setup)
+                .setOnPickResult(new IPickResult() {
+                    @Override
+                    public void onPickResult(PickResult r) {
+
+                        if (r.getError() == null) {
+                            //If you want the Uri.
+                            //Mandatory to refresh image from Uri.
+                            //getImageView().setImageURI(null);
+
+                            //Setting the real returned image.
+                            //getImageView().setImageURI(r.getUri());
+
+                            //If you want the Bitmap.
+                           // getImageView().setImageBitmap(r.getBitmap());
+
+                            Uri imageUri = r.getUri();
+
+                            Intent createReportIntent = new Intent(MainActivity.this, CreateReportActivity.class);
+                            createReportIntent.putExtra("imageReport", imageUri);
+                            startActivity(createReportIntent);
+
+
+                            //Image path
+                            //r.getPath();
+                        } else {
+                            //Handle possible errors
+                            //TODO: do what you have to do with r.getError();
+                            Toast.makeText(getApplicationContext(), r.getError().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                }).show(getSupportFragmentManager());
+
+
+
+    }
+
     private void loadUserInfo(final FirebaseUser user) {
 
         String uuid = user.getUid();
@@ -184,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 txtName.setText(dataSnapshot.child("name").getValue().toString());
                 String profileUrl = dataSnapshot.child("imageProfile").getValue().toString();
+
 
                 if (profileUrl != null) {
 
@@ -207,8 +268,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendTostart() {
         Intent startIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(startIntent);
-        finish();
+
     }
 
     /***
@@ -314,10 +376,13 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 0;
                         break;
                     case R.id.nav_my_reports:
-                        navItemIndex = 1;
+                        navItemIndex = 0;
+                        Intent myReportsIntent = new Intent(MainActivity.this, MyReportsActivity.class);
+                        startActivity(myReportsIntent);
+                        drawer.closeDrawers();
                         break;
                     case R.id.nav_profile_settings:
-                        //navItemIndex = 2;
+                        navItemIndex = 0;
                         Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
                         startActivity(profileIntent);
                         drawer.closeDrawers();
@@ -449,4 +514,6 @@ public class MainActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
+
+
 }

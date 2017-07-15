@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_details_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <include
+            android:id="@+id/app_bar_details_report_bar"
+            layout="@layout/app_bar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffe5e5e5"
+        android:layout_below="@id/app_bar_details_report"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+
+            <lu.gab.com.alertapet.util.ProportionalImageView
+                android:adjustViewBounds="true"
+                android:id="@+id/report_image_details"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+
+            <TextView
+                android:id="@+id/postadoPor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/report_image_details"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="14dp"
+                android:text="Usuário"
+                android:textColor="@color/colorPrimary" />
+
+
+            <TextView
+                android:id="@+id/user_detail_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/postadoPor"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/postadoPor"
+                android:text="Luana"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/time_detail_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/postadoPor"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                android:text="TextView"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/textViewLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/postadoPor"
+                android:layout_alignTop="@+id/imageViewPin"
+                android:text="Localização"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/locationReport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textViewLocation"
+                android:layout_below="@+id/textViewLocation"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/imageViewPin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_location_on_black_24dp"
+                android:layout_below="@+id/time_detail_report"
+                android:layout_alignEnd="@+id/textDescription"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/locationReport"
+                android:layout_below="@+id/locationReport"
+                android:layout_marginTop="16dp"
+                android:text="Telefone"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView4"
+                android:layout_below="@+id/textView4"
+                android:layout_marginTop="8dp"
+                android:text="---------"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/imageViewPin"
+                android:layout_below="@+id/imageViewPin"
+                android:layout_marginTop="28dp"
+                app:srcCompat="@drawable/ic_phone_black_24dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/textViewPhone"
+                android:layout_below="@+id/textViewPhone"
+                android:layout_marginTop="16dp"
+                android:text="Descrição"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textDescription"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/time_detail_report"
+                android:layout_alignStart="@id/textView6"
+                android:layout_below="@+id/textView6"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView" />
+
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import lu.gab.com.alertapet.Model.*;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.HashMap;
 
@@ -28,6 +30,7 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private FirebaseAuth auth;
     private DatabaseReference firebaseDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,12 @@ public class SignupActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
+                if (TextUtils.isEmpty(displayName)) {
+                    Toast.makeText(getApplicationContext(), "Digite o nome!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Digite o email!", Toast.LENGTH_SHORT).show();
                     return;
@@ -92,13 +101,13 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(final String displayName, String password, String email){
+    private void registerUser(final String displayName, String password, final String email){
         //create user
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
 
                         if (!task.isSuccessful()) {
@@ -109,10 +118,12 @@ public class SignupActivity extends AppCompatActivity {
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             String uuid = currentUser.getUid();
 
+
                             firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uuid);
                             HashMap<String,String> userMap= new HashMap<String, String>();
                             userMap.put("name",displayName);
                             userMap.put("imageProfile","default");
+                            userMap.put("thumb_image","default");
 
                             firebaseDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

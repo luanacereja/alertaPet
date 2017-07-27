@@ -111,8 +111,18 @@ public class SignupActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
-                                    Toast.LENGTH_SHORT).show();
+
+                            if(task.getException().getMessage().equals("The email address is already in use by another account.")) {
+
+                                Toast.makeText(SignupActivity.this, "O email fornecido já está em uso. Utilize outro email por favor",
+                                        Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(SignupActivity.this, "Falha na autenticação" ,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+
+
                         } else {
 
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

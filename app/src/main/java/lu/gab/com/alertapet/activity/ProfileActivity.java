@@ -188,6 +188,20 @@ public class ProfileActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogBox, int id) {
 
 
+
+                                String newName = userInputName.getText().toString();
+
+                                if (TextUtils.isEmpty(newName)) {
+
+                                    // progressDialog.setMessage("Erro ao alterar nome");
+                                    //  Toast.makeText(getApplicationContext(),"Erro ao alterar nome", Toast.LENGTH_LONG).show();
+                                    //progressDialog.dismiss();
+
+                                    Toast.makeText(getApplicationContext(), "Campo não pode ficar vazio!", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+
+
                                 alertDialog.dismiss();
 
                                 progressDialog = new ProgressDialog(ProfileActivity.this);
@@ -196,12 +210,6 @@ public class ProfileActivity extends AppCompatActivity {
                                 progressDialog.setCanceledOnTouchOutside(false);
                                 progressDialog.show();
 
-                                String newName = userInputName.getText().toString();
-
-                                if (TextUtils.isEmpty(newName)) {
-                                    Toast.makeText(getApplicationContext(), "Digite o nome!", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
 
 
                                 mUserDatabase.child("name").setValue(newName).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -279,10 +287,10 @@ public class ProfileActivity extends AppCompatActivity {
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
                 Uri resultUri = result.getUri();
-                File thumbnail_filePath = new File(resultUri.getPath());
+                // File thumbnail_filePath = new File(resultUri.getPath());
 
                 String current_user_uid = currentUser.getUid();
-                Bitmap thumbn_bitmap = new Compressor(this)
+              /*  Bitmap thumbn_bitmap = new Compressor(this)
                         .setMaxWidth(200)
                         .setMaxHeight(200)
                         .setQuality(75)
@@ -291,10 +299,10 @@ public class ProfileActivity extends AppCompatActivity {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 thumbn_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 final byte[] thumb_byte = baos.toByteArray();
-
-                StorageReference filePath = imageStorage.child("profile_images").child( current_user_uid + ".jpg");
-                final StorageReference thumb_file_path = imageStorage.child("profile_images").child("thumb")
-                        .child( current_user_uid + ".jpg"   );
+*/
+                StorageReference filePath = imageStorage.child("profile_images").child(current_user_uid + ".jpg");
+                //final StorageReference thumb_file_path = imageStorage.child("profile_images").child("thumb")
+                //       .child( current_user_uid + ".jpg"   );
 
 
                 filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -302,39 +310,43 @@ public class ProfileActivity extends AppCompatActivity {
 
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             final String donwload_url = task.getResult().getDownloadUrl().toString();
 
-                            UploadTask uploadTask = thumb_file_path.putBytes(thumb_byte);
-                            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            mUserDatabase.child("imageProfile").setValue(donwload_url).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                    String thumb_downloadUrl = thumb_task.getResult().getDownloadUrl().toString();
-
-                                    if (thumb_task.isSuccessful()){
-
-                                        Map updateHashmap = new HashMap();
-                                        updateHashmap.put("imageProfile",donwload_url);
-                                        updateHashmap.put("thumb_image",thumb_downloadUrl);
-
-                                        mUserDatabase.updateChildren(updateHashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    progressDialog.dismiss();
-                                                }
-                                            }
-                                        });
-                                    }else{
-                                        Toast.makeText(ProfileActivity.this,"Erro ao fazer upload da imagem", Toast.LENGTH_LONG);
+                                    if (task.isSuccessful()) {
+                                        progressDialog.dismiss();
                                     }
-
                                 }
                             });
-                        }else {
-                            progressDialog.dismiss();
+
+                            //UploadTask uploadTask = thumb_file_path.putBytes(thumb_byte);
+                            //  uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            //     @Override
+                            //     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
+
+                            //       String thumb_downloadUrl = thumb_task.getResult().getDownloadUrl().toString();
+
+                            //    if (thumb_task.isSuccessful()){
+
+                            //        Map updateHashmap = new HashMap();
+                            //        updateHashmap.put("imageProfile",donwload_url);
+                            //       updateHashmap.put("thumb_image",thumb_downloadUrl);
+
+                            //   mUserDatabase.updateChildren(updateHashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            //      @Override
+                            //      public void onComplete(@NonNull Task<Void> task) {
+                            //           if (task.isSuccessful()){
+                            //              progressDialog.dismiss();
+                            //         }
+                            //     }
+                            // });
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "Erro ao fazer upload da imagem", Toast.LENGTH_LONG);
                         }
                     }
                 });
